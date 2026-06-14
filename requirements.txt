@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+python-jose[cryptography]
+bcrypt
+pdfplumber
+pinecone-client
+google-generativeai
+boto3
+python-multipart
+psycopg2-binary
+python-dotenv
+requests
+pydantic[email]
