@@ -2,82 +2,75 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PigmentPhylo AI</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:system-ui,sans-serif;background:#0a0f1a;color:#e2e8f0;height:100vh;display:flex;flex-direction:column;max-width:480px;margin:0 auto;}
-.topbar{background:#0d1524;border-bottom:1px solid #1d9e7533;padding:10px 14px;display:flex;align-items:center;gap:10px;}
-.av{width:32px;height:32px;border-radius:50%;background:#0f3d2a;display:flex;align-items:center;justify-content:center;font-size:16px;}
-.ttl{font-size:13px;font-weight:600;color:#e2e8f0;}
-.sub{font-size:10px;color:#1D9E75;}
-.sdot{width:7px;height:7px;border-radius:50%;background:#1D9E75;margin-left:auto;}
-.tabs{display:flex;background:#0d1524;border-bottom:1px solid #1a2540;}
-.tab{flex:1;padding:8px 4px;font-size:10px;font-weight:500;color:#475569;border:none;background:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;border-bottom:2px solid transparent;}
-.tab.on{color:#1D9E75;border-bottom:2px solid #1D9E75;}
+body{font-family:system-ui,sans-serif;background:#0a0f1a;color:#e2e8f0;height:100vh;display:flex;flex-direction:column;max-width:480px;margin:0 auto;overflow:hidden;}
+.top{background:#0d1524;border-bottom:1px solid #1d9e7533;padding:10px 14px;display:flex;align-items:center;gap:10px;flex-shrink:0;}
+.av{width:30px;height:30px;border-radius:50%;background:#0f3d2a;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
+.tt{font-size:12px;font-weight:600;color:#e2e8f0;}
+.ts{font-size:9px;color:#1D9E75;}
+.dot{width:6px;height:6px;border-radius:50%;background:#1D9E75;margin-left:auto;}
+.nav{display:flex;background:#0d1524;border-bottom:1px solid #1a2540;flex-shrink:0;}
+.nb{flex:1;padding:7px 2px;font-size:9px;font-weight:500;color:#475569;border:none;background:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;border-bottom:2px solid transparent;}
+.nb.on{color:#1D9E75;border-bottom:2px solid #1D9E75;}
 .pane{display:none;flex:1;flex-direction:column;overflow:hidden;}
 .pane.on{display:flex;}
-.chips{padding:7px 10px;display:flex;gap:5px;flex-wrap:wrap;background:#0a0f1a;border-bottom:1px solid #1a2540;}
-.chip{font-size:10px;padding:4px 9px;border-radius:14px;border:1px solid #1d2d3e;color:#64748b;background:#111827;cursor:pointer;}
+.chips{padding:6px 8px;display:flex;gap:4px;flex-wrap:wrap;background:#0a0f1a;border-bottom:1px solid #1a2540;flex-shrink:0;}
+.chip{font-size:9px;padding:3px 8px;border-radius:12px;border:1px solid #1d2d3e;color:#64748b;background:#111827;cursor:pointer;}
 .chip:hover{border-color:#1D9E75;color:#1D9E75;}
-.msgs{flex:1;padding:10px;display:flex;flex-direction:column;gap:8px;overflow-y:auto;background:#0a0f1a;}
-.br{display:flex;gap:7px;align-items:flex-start;}
+.msgs{flex:1;padding:8px;display:flex;flex-direction:column;gap:6px;overflow-y:auto;}
+.br{display:flex;gap:6px;align-items:flex-start;}
 .br.u{flex-direction:row-reverse;}
-.bav{width:26px;height:26px;border-radius:50%;background:#0f3d2a;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;}
-.bbl{max-width:82%;padding:8px 11px;border-radius:12px;font-size:11px;line-height:1.6;color:#e2e8f0;background:#111827;border:1px solid #1e2d40;}
-.br.u .bbl{background:#0f4a38;border-color:#1D9E75;color:#a7f3d0;border-radius:12px 12px 3px 12px;}
-.br.b .bbl{border-radius:3px 12px 12px 12px;}
-.btag{display:inline-block;font-size:9px;padding:1px 6px;border-radius:6px;margin-top:4px;font-weight:500;background:#0f3d2a;color:#1D9E75;}
-.btag.phy{background:#2d1a0e;color:#D85A30;}
-.btag.mol{background:#1e1a3f;color:#7F77DD;}
-.comp{border-top:1px solid #1a2540;background:#0d1524;padding:8px 10px;display:flex;align-items:center;gap:7px;}
-.comp input{flex:1;background:#111827;border:1px solid #1e2d40;border-radius:18px;padding:7px 12px;font-size:11px;color:#e2e8f0;outline:none;}
+.bav{width:22px;height:22px;border-radius:50%;background:#0f3d2a;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;}
+.bbl{max-width:82%;padding:7px 10px;border-radius:10px;font-size:10px;line-height:1.6;color:#e2e8f0;background:#111827;border:1px solid #1e2d40;}
+.br.u .bbl{background:#0f4a38;border-color:#1D9E75;color:#a7f3d0;border-radius:10px 10px 2px 10px;}
+.br.b .bbl{border-radius:2px 10px 10px 10px;}
+.tag{display:inline-block;font-size:8px;padding:1px 5px;border-radius:5px;margin-top:3px;font-weight:500;background:#0f3d2a;color:#1D9E75;}
+.tag.p{background:#2d1a0e;color:#D85A30;}
+.tag.m{background:#1e1a3f;color:#7F77DD;}
+.comp{border-top:1px solid #1a2540;background:#0d1524;padding:7px 8px;display:flex;align-items:center;gap:6px;flex-shrink:0;}
+.comp input{flex:1;background:#111827;border:1px solid #1e2d40;border-radius:16px;padding:6px 10px;font-size:10px;color:#e2e8f0;outline:none;}
 .comp input::placeholder{color:#334155;}
-.sbtn{width:30px;height:30px;border-radius:50%;background:#1D9E75;border:none;cursor:pointer;color:#04342C;font-size:14px;display:flex;align-items:center;justify-content:center;}
-.evo-wrap{flex:1;overflow-y:auto;padding:10px;background:#0a0f1a;}
-.evo-title{font-size:12px;font-weight:500;color:#94a3b8;margin-bottom:8px;}
-.filters{display:flex;gap:5px;margin-bottom:10px;flex-wrap:wrap;}
-.ef{font-size:10px;padding:4px 9px;border-radius:12px;border:1px solid #1e2d40;color:#64748b;background:#111827;cursor:pointer;}
+.sb{width:28px;height:28px;border-radius:50%;background:#1D9E75;border:none;cursor:pointer;color:#04342C;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.scroll{flex:1;overflow-y:auto;padding:8px;}
+.sec-title{font-size:11px;font-weight:500;color:#94a3b8;margin-bottom:6px;}
+.frow{display:flex;gap:4px;margin-bottom:8px;flex-wrap:wrap;}
+.ef{font-size:9px;padding:3px 8px;border-radius:10px;border:1px solid #1e2d40;color:#64748b;background:#111827;cursor:pointer;}
 .ef.on{border-color:#D85A30;color:#D85A30;}
-.mol-wrap{flex:1;overflow-y:auto;padding:10px;background:#0a0f1a;}
-.mol-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:10px;}
-.mc{background:#111827;border:1px solid #1e2d40;border-radius:10px;padding:10px;cursor:pointer;}
-.mc.sel{border-color:#7F77DD;}
-.mc-name{font-size:11px;font-weight:500;color:#e2e8f0;}
-.mc-cls{font-size:9px;color:#7F77DD;}
-.mol-detail{background:#111827;border:1px solid #1e2d40;border-radius:10px;padding:12px;}
-.md-name{font-size:13px;font-weight:500;color:#e2e8f0;margin-bottom:8px;}
-.md-row{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #1a2540;font-size:10px;}
-.md-k{color:#64748b;}
-.md-v{color:#94a3b8;font-weight:500;}
-.img-wrap{flex:1;overflow-y:auto;padding:10px;background:#0a0f1a;}
-.img-card{background:#111827;border:1px solid #1e2d40;border-radius:10px;padding:10px;margin-bottom:10px;}
-.img-head{font-size:10px;font-weight:500;color:#94a3b8;margin-bottom:8px;}
-.spec-bar{display:flex;gap:3px;margin-bottom:6px;}
-.spec-seg{height:32px;border-radius:4px;flex:1;}
-.typing{display:flex;gap:4px;align-items:center;padding:8px 12px;background:#111827;border-radius:10px;width:60px;}
-.typing span{width:5px;height:5px;border-radius:50%;background:#475569;animation:bk 1.2s infinite;}
-.typing span:nth-child(2){animation-delay:0.2s;}
-.typing span:nth-child(3){animation-delay:0.4s;}
-@keyframes bk{0%,80%,100%{opacity:0.2;}40%{opacity:1;}}
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px;}
+.mc{background:#111827;border:1px solid #1e2d40;border-radius:8px;padding:8px;cursor:pointer;}
+.mc.on{border-color:#7F77DD;}
+.mn{font-size:10px;font-weight:500;color:#e2e8f0;}
+.mc2{font-size:8px;color:#7F77DD;}
+.mdet{background:#111827;border:1px solid #1e2d40;border-radius:8px;padding:10px;}
+.mdn{font-size:12px;font-weight:500;color:#e2e8f0;margin-bottom:6px;}
+.mdr{display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #1a2540;font-size:9px;}
+.mdk{color:#64748b;}
+.mdv{color:#94a3b8;font-weight:500;}
+.icard{background:#111827;border:1px solid #1e2d40;border-radius:8px;padding:8px;margin-bottom:8px;}
+.ih{font-size:9px;font-weight:500;color:#94a3b8;margin-bottom:6px;}
+.sbar{display:flex;gap:2px;margin-bottom:4px;}
+.ss{height:28px;border-radius:3px;flex:1;}
+.typ{display:flex;gap:3px;align-items:center;padding:6px 10px;background:#111827;border-radius:8px;width:50px;}
+.typ span{width:4px;height:4px;border-radius:50%;background:#475569;animation:bk 1.2s infinite;}
+.typ span:nth-child(2){animation-delay:.2s;}
+.typ span:nth-child(3){animation-delay:.4s;}
+@keyframes bk{0%,80%,100%{opacity:.2;}40%{opacity:1;}}
 </style>
 </head>
 <body>
-
-<div class="topbar">
+<div class="top">
   <div class="av">🧬</div>
-  <div>
-    <div class="ttl">PigmentPhylo AI</div>
-    <div class="sub">BIO-ARC-772 · Explanatory Mode</div>
-  </div>
-  <div class="sdot"></div>
+  <div><div class="tt">PigmentPhylo AI</div><div class="ts">BIO-ARC-772 · Explanatory Mode</div></div>
+  <div class="dot"></div>
 </div>
-
-<div class="tabs">
-  <button class="tab on" onclick="sw('chat',this)">💬<span>Chat</span></button>
-  <button class="tab" onclick="sw('evo',this)">🌿<span>Evo Map</span></button>
-  <button class="tab" onclick="sw('mol',this)">⚗️<span>Molecules</span></button>
-  <button class="tab" onclick="sw('img',this)">🖼️<span>Images</span></button>
+<div class="nav">
+  <button class="nb on" onclick="sw('chat',this)">💬<span>Chat</span></button>
+  <button class="nb" onclick="sw('evo',this)">🌿<span>Evo Map</span></button>
+  <button class="nb" onclick="sw('mol',this)">⚗️<span>Molecules</span></button>
+  <button class="nb" onclick="sw('img',this)">🖼️<span>Images</span></button>
 </div>
 
 <div id="p-chat" class="pane on">
@@ -87,150 +80,146 @@ body{font-family:system-ui,sans-serif;background:#0a0f1a;color:#e2e8f0;height:10
     <span class="chip" onclick="ask('Compare anthocyanins')">Anthocyanins</span>
   </div>
   <div class="msgs" id="msgs">
-    <div class="br b">
-      <div class="bav">🧬</div>
-      <div class="bbl">Hello. I am PigmentPhylo AI in Explanatory Mode. Every answer includes a molecular structure, evolutionary map suggestion, and pigment comparisons. Ask me anything about biological pigments.<span class="btag">RAG ready</span></div>
-    </div>
+    <div class="br b"><div class="bav">🧬</div><div class="bbl">Hello. I am PigmentPhylo AI in Explanatory Mode. Every answer includes molecular structure, evolutionary map suggestion, and pigment comparisons. Ask me anything about biological pigments.<span class="tag">RAG ready</span></div></div>
   </div>
   <div class="comp">
     <input id="inp" placeholder="Ask about any pigment..." onkeydown="if(event.key==='Enter')send()"/>
-    <button class="sbtn" onclick="send()">➤</button>
+    <button class="sb" onclick="send()">➤</button>
   </div>
 </div>
 
 <div id="p-evo" class="pane">
-  <div class="evo-wrap">
-    <div class="evo-title">Pigment evolutionary map · 3.5 billion years</div>
-    <div class="filters">
-      <span class="ef on" onclick="filt(this)">All</span>
-      <span class="ef" onclick="filt(this)">Chlorophylls</span>
-      <span class="ef" onclick="filt(this)">Carotenoids</span>
-      <span class="ef" onclick="filt(this)">Flavonoids</span>
+  <div class="scroll">
+    <div class="sec-title">Pigment evolutionary map · 3.5 billion years</div>
+    <div class="frow">
+      <span class="ef on" onclick="ef(this)">All</span>
+      <span class="ef" onclick="ef(this)">Chlorophylls</span>
+      <span class="ef" onclick="ef(this)">Carotenoids</span>
+      <span class="ef" onclick="ef(this)">Flavonoids</span>
     </div>
-    <svg width="100%" viewBox="0 0 340 260" style="background:#0f1923;border-radius:8px;">
-      <rect x="120" y="10" width="100" height="30" rx="6" fill="#1a2540" stroke="#334155"/>
-      <text x="170" y="30" text-anchor="middle" font-size="10" fill="#94a3b8">Isoprenoid ancestor</text>
-      <text x="170" y="43" text-anchor="middle" font-size="8" fill="#475569">3.5 GYA</text>
-      <line x1="170" y1="40" x2="90" y2="80" stroke="#334155" stroke-width="1"/>
-      <line x1="170" y1="40" x2="250" y2="80" stroke="#334155" stroke-width="1"/>
-      <rect x="30" y="80" width="120" height="30" rx="6" fill="#0f3d2a" stroke="#1D9E75"/>
-      <text x="90" y="99" text-anchor="middle" font-size="10" fill="#1D9E75" font-weight="500">Chlorophyll-a</text>
-      <rect x="190" y="80" width="120" height="30" rx="6" fill="#2d1e08" stroke="#EF9F27"/>
-      <text x="250" y="99" text-anchor="middle" font-size="10" fill="#EF9F27" font-weight="500">β-Carotene</text>
-      <line x1="70" y1="110" x2="40" y2="150" stroke="#1D9E7566" stroke-width="0.8"/>
-      <line x1="90" y1="110" x2="90" y2="150" stroke="#1D9E7566" stroke-width="0.8"/>
-      <line x1="110" y1="110" x2="140" y2="150" stroke="#1D9E7566" stroke-width="0.8"/>
-      <rect x="10" y="150" width="60" height="26" rx="5" fill="#0a1a12" stroke="#1D9E7544"/>
-      <text x="40" y="167" text-anchor="middle" font-size="9" fill="#5eead4">Chl-b</text>
-      <rect x="60" y="150" width="70" height="26" rx="5" fill="#0a1a12" stroke="#1D9E7544"/>
-      <text x="95" y="167" text-anchor="middle" font-size="9" fill="#5eead4">Bacteriochl</text>
-      <rect x="118" y="150" width="50" height="26" rx="5" fill="#0a1a12" stroke="#1D9E7544"/>
-      <text x="143" y="167" text-anchor="middle" font-size="9" fill="#5eead4">Chl-c</text>
-      <line x1="230" y1="110" x2="210" y2="150" stroke="#EF9F2766" stroke-width="0.8"/>
-      <line x1="250" y1="110" x2="250" y2="150" stroke="#EF9F2766" stroke-width="0.8"/>
-      <line x1="270" y1="110" x2="295" y2="150" stroke="#EF9F2766" stroke-width="0.8"/>
-      <rect x="185" y="150" width="55" height="26" rx="5" fill="#1a0e03" stroke="#EF9F2744"/>
-      <text x="212" y="167" text-anchor="middle" font-size="9" fill="#fbbf24">α-Carotene</text>
-      <rect x="228" y="150" width="50" height="26" rx="5" fill="#1a0e03" stroke="#EF9F2744"/>
-      <text x="253" y="167" text-anchor="middle" font-size="9" fill="#fbbf24">Lycopene</text>
-      <rect x="272" y="150" width="60" height="26" rx="5" fill="#1a0e03" stroke="#EF9F2744"/>
-      <text x="302" y="167" text-anchor="middle" font-size="9" fill="#fbbf24">Xanthophyll</text>
-      <line x1="170" y1="40" x2="170" y2="200" stroke="#D4537E44" stroke-width="0.8" stroke-dasharray="4 3"/>
-      <rect x="110" y="200" width="120" height="26" rx="5" fill="#2d0f1e" stroke="#D4537E"/>
-      <text x="170" y="217" text-anchor="middle" font-size="9" fill="#D4537E" font-weight="500">Anthocyanins · 180 MYA</text>
-      <text x="10" y="255" font-size="8" fill="#334155">GYA = billion years · MYA = million years</text>
+    <svg width="100%" viewBox="0 0 340 270" style="background:#0f1923;border-radius:8px;margin-bottom:8px;">
+      <rect x="115" y="10" width="110" height="28" rx="5" fill="#1a2540" stroke="#334155"/>
+      <text x="170" y="28" text-anchor="middle" font-size="9" fill="#94a3b8" font-weight="500">Isoprenoid ancestor 3.5 GYA</text>
+      <line x1="170" y1="38" x2="90" y2="75" stroke="#334155" stroke-width="1"/>
+      <line x1="170" y1="38" x2="250" y2="75" stroke="#334155" stroke-width="1"/>
+      <rect x="30" y="75" width="120" height="28" rx="5" fill="#0f3d2a" stroke="#1D9E75"/>
+      <text x="90" y="93" text-anchor="middle" font-size="9" fill="#1D9E75" font-weight="500">Chlorophyll-a</text>
+      <rect x="190" y="75" width="120" height="28" rx="5" fill="#2d1e08" stroke="#EF9F27"/>
+      <text x="250" y="93" text-anchor="middle" font-size="9" fill="#EF9F27" font-weight="500">β-Carotene</text>
+      <line x1="70" y1="103" x2="40" y2="140" stroke="#1D9E7566" stroke-width="0.8"/>
+      <line x1="90" y1="103" x2="90" y2="140" stroke="#1D9E7566" stroke-width="0.8"/>
+      <line x1="110" y1="103" x2="140" y2="140" stroke="#1D9E7566" stroke-width="0.8"/>
+      <rect x="8" y="140" width="56" height="24" rx="4" fill="#0a1a12" stroke="#1D9E7544"/>
+      <text x="36" y="156" text-anchor="middle" font-size="8" fill="#5eead4">Chl-b</text>
+      <rect x="65" y="140" width="56" height="24" rx="4" fill="#0a1a12" stroke="#1D9E7544"/>
+      <text x="93" y="156" text-anchor="middle" font-size="8" fill="#5eead4">Bacteriochl</text>
+      <rect x="122" y="140" width="46" height="24" rx="4" fill="#0a1a12" stroke="#1D9E7544"/>
+      <text x="145" y="156" text-anchor="middle" font-size="8" fill="#5eead4">Chl-c</text>
+      <line x1="230" y1="103" x2="210" y2="140" stroke="#EF9F2766" stroke-width="0.8"/>
+      <line x1="250" y1="103" x2="250" y2="140" stroke="#EF9F2766" stroke-width="0.8"/>
+      <line x1="270" y1="103" x2="295" y2="140" stroke="#EF9F2766" stroke-width="0.8"/>
+      <rect x="183" y="140" width="52" height="24" rx="4" fill="#1a0e03" stroke="#EF9F2744"/>
+      <text x="209" y="156" text-anchor="middle" font-size="8" fill="#fbbf24">α-Carotene</text>
+      <rect x="228" y="140" width="46" height="24" rx="4" fill="#1a0e03" stroke="#EF9F2744"/>
+      <text x="251" y="156" text-anchor="middle" font-size="8" fill="#fbbf24">Lycopene</text>
+      <rect x="268" y="140" width="60" height="24" rx="4" fill="#1a0e03" stroke="#EF9F2744"/>
+      <text x="298" y="156" text-anchor="middle" font-size="8" fill="#fbbf24">Xanthophyll</text>
+      <line x1="170" y1="38" x2="170" y2="195" stroke="#D4537E44" stroke-width="0.8" stroke-dasharray="4 3"/>
+      <rect x="105" y="195" width="130" height="24" rx="4" fill="#2d0f1e" stroke="#D4537E"/>
+      <text x="170" y="211" text-anchor="middle" font-size="8" fill="#D4537E" font-weight="500">Anthocyanins · 180 MYA</text>
+      <text x="8" y="255" font-size="7" fill="#334155">GYA = billion years ago · MYA = million years ago</text>
     </svg>
-    <div style="display:flex;gap:10px;margin-top:8px;flex-wrap:wrap;">
-      <div style="display:flex;align-items:center;gap:4px;font-size:10px;color:#64748b;"><div style="width:8px;height:8px;border-radius:50%;background:#1D9E75;"></div>Chlorophylls</div>
-      <div style="display:flex;align-items:center;gap:4px;font-size:10px;color:#64748b;"><div style="width:8px;height:8px;border-radius:50%;background:#EF9F27;"></div>Carotenoids</div>
-      <div style="display:flex;align-items:center;gap:4px;font-size:10px;color:#64748b;"><div style="width:8px;height:8px;border-radius:50%;background:#D4537E;"></div>Flavonoids</div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;gap:4px;font-size:9px;color:#64748b;"><div style="width:7px;height:7px;border-radius:50%;background:#1D9E75;"></div>Chlorophylls</div>
+      <div style="display:flex;align-items:center;gap:4px;font-size:9px;color:#64748b;"><div style="width:7px;height:7px;border-radius:50%;background:#EF9F27;"></div>Carotenoids</div>
+      <div style="display:flex;align-items:center;gap:4px;font-size:9px;color:#64748b;"><div style="width:7px;height:7px;border-radius:50%;background:#D4537E;"></div>Flavonoids</div>
     </div>
   </div>
 </div>
 
 <div id="p-mol" class="pane">
-  <div class="mol-wrap">
-    <div class="mol-grid">
-      <div class="mc sel" onclick="selMol(0,this)"><div class="mc-name">Chlorophyll-a</div><div class="mc-cls">Tetrapyrrole</div></div>
-      <div class="mc" onclick="selMol(1,this)"><div class="mc-name">β-Carotene</div><div class="mc-cls" style="color:#EF9F27;">Carotenoid</div></div>
-      <div class="mc" onclick="selMol(2,this)"><div class="mc-name">Cyanidin</div><div class="mc-cls" style="color:#D4537E;">Anthocyanin</div></div>
-      <div class="mc" onclick="selMol(3,this)"><div class="mc-name">Melanin</div><div class="mc-cls" style="color:#888780;">Indole polymer</div></div>
+  <div class="scroll">
+    <div class="mgrid">
+      <div class="mc on" onclick="sm(0,this)"><div class="mn">Chlorophyll-a</div><div class="mc2">Tetrapyrrole</div></div>
+      <div class="mc" onclick="sm(1,this)"><div class="mn">β-Carotene</div><div class="mc2" style="color:#EF9F27;">Carotenoid</div></div>
+      <div class="mc" onclick="sm(2,this)"><div class="mn">Cyanidin</div><div class="mc2" style="color:#D4537E;">Anthocyanin</div></div>
+      <div class="mc" onclick="sm(3,this)"><div class="mn">Melanin</div><div class="mc2" style="color:#888780;">Indole polymer</div></div>
     </div>
-    <div class="mol-detail">
-      <div class="md-name" id="md-n">Chlorophyll-a</div>
-      <div class="md-row"><span class="md-k">Formula</span><span class="md-v" id="md-f">C₅₅H₇₂MgN₄O₅</span></div>
-      <div class="md-row"><span class="md-k">Class</span><span class="md-v" id="md-c">Tetrapyrrole · Porphyrin</span></div>
-      <div class="md-row"><span class="md-k">MW</span><span class="md-v" id="md-m">893.5 g/mol</span></div>
-      <div class="md-row"><span class="md-k">Absorption</span><span class="md-v" id="md-a">430nm + 680nm</span></div>
-      <div class="md-row"><span class="md-k">Confidence</span><span class="md-v" id="md-p" style="color:#1D9E75;">97%</span></div>
-      <div class="md-row"><span class="md-k">Divergence</span><span class="md-v" id="md-d">~2.7 GYA</span></div>
+    <div class="mdet">
+      <div class="mdn" id="mn">Chlorophyll-a</div>
+      <div class="mdr"><span class="mdk">Formula</span><span class="mdv" id="mf">C₅₅H₇₂MgN₄O₅</span></div>
+      <div class="mdr"><span class="mdk">Class</span><span class="mdv" id="mc2">Tetrapyrrole · Porphyrin</span></div>
+      <div class="mdr"><span class="mdk">MW</span><span class="mdv" id="mw">893.5 g/mol</span></div>
+      <div class="mdr"><span class="mdk">Absorption</span><span class="mdv" id="ma">430nm + 680nm</span></div>
+      <div class="mdr"><span class="mdk">Confidence</span><span class="mdv" id="mp" style="color:#1D9E75;">97%</span></div>
+      <div class="mdr"><span class="mdk">Divergence</span><span class="mdv" id="md">~2.7 GYA</span></div>
     </div>
   </div>
 </div>
 
 <div id="p-img" class="pane">
-  <div class="img-wrap">
-    <div class="img-card">
-      <div class="img-head">Chlorophyll-a absorption spectrum</div>
-      <div class="spec-bar">
-        <div class="spec-seg" style="background:#4c1d95;opacity:0.8;"></div>
-        <div class="spec-seg" style="background:#1d4ed8;opacity:0.8;"></div>
-        <div class="spec-seg" style="background:#0891b2;opacity:0.8;"></div>
-        <div class="spec-seg" style="background:#16a34a;opacity:0.8;"></div>
-        <div class="spec-seg" style="background:#ca8a04;opacity:0.8;"></div>
-        <div class="spec-seg" style="background:#ea580c;opacity:0.8;"></div>
-        <div class="spec-seg" style="background:#dc2626;opacity:0.8;"></div>
+  <div class="scroll">
+    <div class="icard">
+      <div class="ih">Chlorophyll-a absorption spectrum</div>
+      <div class="sbar">
+        <div class="ss" style="background:#4c1d95;"></div>
+        <div class="ss" style="background:#1d4ed8;"></div>
+        <div class="ss" style="background:#0891b2;"></div>
+        <div class="ss" style="background:#16a34a;"></div>
+        <div class="ss" style="background:#ca8a04;"></div>
+        <div class="ss" style="background:#ea580c;"></div>
+        <div class="ss" style="background:#dc2626;"></div>
       </div>
-      <div style="display:flex;justify-content:space-between;font-size:9px;color:#475569;"><span>380nm</span><span style="color:#1D9E75;">430nm▲</span><span style="color:#1D9E75;">680nm▲</span><span>700nm</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:8px;color:#475569;"><span>380nm</span><span style="color:#1D9E75;">430nm▲</span><span style="color:#1D9E75;">680nm▲</span><span>700nm</span></div>
     </div>
-    <div class="img-card">
-      <div class="img-head">Carotenoid colour gradient</div>
-      <div style="display:flex;gap:4px;">
-        <div style="flex:1;height:36px;border-radius:4px;background:#fbbf24;display:flex;align-items:center;justify-content:center;font-size:8px;color:#431407;">β-Car</div>
-        <div style="flex:1;height:36px;border-radius:4px;background:#f97316;display:flex;align-items:center;justify-content:center;font-size:8px;color:#431407;">Zeax</div>
-        <div style="flex:1;height:36px;border-radius:4px;background:#ea580c;display:flex;align-items:center;justify-content:center;font-size:8px;color:#fef2f2;">Lutein</div>
-        <div style="flex:1;height:36px;border-radius:4px;background:#dc2626;display:flex;align-items:center;justify-content:center;font-size:8px;color:#fef2f2;">Lyco</div>
-        <div style="flex:1;height:36px;border-radius:4px;background:#991b1b;display:flex;align-items:center;justify-content:center;font-size:8px;color:#fef2f2;">Caps</div>
+    <div class="icard">
+      <div class="ih">Carotenoid colour gradient</div>
+      <div style="display:flex;gap:3px;">
+        <div style="flex:1;height:32px;border-radius:3px;background:#fbbf24;display:flex;align-items:center;justify-content:center;font-size:7px;color:#431407;">β-Car</div>
+        <div style="flex:1;height:32px;border-radius:3px;background:#f97316;display:flex;align-items:center;justify-content:center;font-size:7px;color:#431407;">Zeax</div>
+        <div style="flex:1;height:32px;border-radius:3px;background:#ea580c;display:flex;align-items:center;justify-content:center;font-size:7px;color:#fef2f2;">Lutein</div>
+        <div style="flex:1;height:32px;border-radius:3px;background:#dc2626;display:flex;align-items:center;justify-content:center;font-size:7px;color:#fef2f2;">Lyco</div>
+        <div style="flex:1;height:32px;border-radius:3px;background:#991b1b;display:flex;align-items:center;justify-content:center;font-size:7px;color:#fef2f2;">Caps</div>
       </div>
     </div>
-    <div class="img-card">
-      <div class="img-head">Anthocyanin pH colour shift · same molecule</div>
-      <div style="display:flex;gap:4px;">
-        <div style="flex:1;height:40px;border-radius:4px;background:#dc2626;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:9px;color:white;"><span>pH 2</span><span style="font-size:8px;">Red</span></div>
-        <div style="flex:1;height:40px;border-radius:4px;background:#9333ea;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:9px;color:white;"><span>pH 5</span><span style="font-size:8px;">Pink</span></div>
-        <div style="flex:1;height:40px;border-radius:4px;background:#7c3aed;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:9px;color:white;"><span>pH 7</span><span style="font-size:8px;">Purple</span></div>
-        <div style="flex:1;height:40px;border-radius:4px;background:#1d4ed8;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:9px;color:white;"><span>pH 11</span><span style="font-size:8px;">Blue</span></div>
+    <div class="icard">
+      <div class="ih">Anthocyanin pH colour shift · same molecule</div>
+      <div style="display:flex;gap:3px;">
+        <div style="flex:1;height:36px;border-radius:3px;background:#dc2626;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:8px;color:white;gap:1px;"><span>pH 2</span><span style="font-size:7px;">Red</span></div>
+        <div style="flex:1;height:36px;border-radius:3px;background:#9333ea;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:8px;color:white;gap:1px;"><span>pH 5</span><span style="font-size:7px;">Pink</span></div>
+        <div style="flex:1;height:36px;border-radius:3px;background:#7c3aed;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:8px;color:white;gap:1px;"><span>pH 7</span><span style="font-size:7px;">Purple</span></div>
+        <div style="flex:1;height:36px;border-radius:3px;background:#1d4ed8;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:8px;color:white;gap:1px;"><span>pH 11</span><span style="font-size:7px;">Blue</span></div>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-const MOLS=[
-  {n:'Chlorophyll-a',f:'C₅₅H₇₂MgN₄O₅',c:'Tetrapyrrole · Porphyrin',m:'893.5 g/mol',a:'430nm + 680nm',p:'97%',d:'~2.7 GYA',col:'#1D9E75'},
-  {n:'β-Carotene',f:'C₄₀H₅₆',c:'Carotenoid · Tetraterpenoid',m:'536.9 g/mol',a:'450–490nm',p:'93%',d:'~340 MYA',col:'#EF9F27'},
-  {n:'Cyanidin',f:'C₁₅H₁₁O₆⁺',c:'Anthocyanin · Flavonoid',m:'287.2 g/mol',a:'510–540nm',p:'88%',d:'~180 MYA',col:'#D4537E'},
-  {n:'Melanin',f:'(C₈H₄NO)ₙ',c:'Indole polymer',m:'Variable',a:'Broad UV-vis',p:'72%',d:'~500 MYA',col:'#888780'}
+const M=[
+  {n:'Chlorophyll-a',f:'C₅₅H₇₂MgN₄O₅',c:'Tetrapyrrole · Porphyrin',w:'893.5 g/mol',a:'430nm + 680nm',p:'97%',d:'~2.7 GYA',col:'#1D9E75'},
+  {n:'β-Carotene',f:'C₄₀H₅₆',c:'Carotenoid · Tetraterpenoid',w:'536.9 g/mol',a:'450–490nm',p:'93%',d:'~340 MYA',col:'#EF9F27'},
+  {n:'Cyanidin',f:'C₁₅H₁₁O₆⁺',c:'Anthocyanin · Flavonoid',w:'287.2 g/mol',a:'510–540nm',p:'88%',d:'~180 MYA',col:'#D4537E'},
+  {n:'Melanin',f:'(C₈H₄NO)ₙ',c:'Indole polymer',w:'Variable',a:'Broad UV-vis',p:'72%',d:'~500 MYA',col:'#888780'}
 ];
-const REPLIES={
-  'show chlorophyll-a structure':'Chlorophyll-a is a tetrapyrrole pigment (C₅₅H₇₂MgN₄O₅). Four pyrrole rings coordinate around a central Mg²⁺ ion. Absorbs red (680nm) and blue (430nm) light. Phylo confidence: 97%. Found across Viridiplantae Clades A–D.',
-  'evolutionary map of carotenoids':'Carotenoids are C₄₀ tetraterpenoids that diverged from a common isoprenoid ancestor ~3 billion years ago. They split into carotenes (pure hydrocarbons) and xanthophylls (oxygenated) around 340 MYA. Switch to the Evo Map tab to explore the full tree.',
-  'compare anthocyanins':'Anthocyanins share a flavylium core but differ in hydroxylation. Cyanidin (88% confidence) gives red-purple. Delphinidin gives blue-purple. Pelargonidin gives orange-red. pH determines colour: red at pH 2, purple at pH 7, blue at pH 11.'
+const R={
+  'show chlorophyll-a structure':'Chlorophyll-a is a tetrapyrrole pigment (C₅₅H₇₂MgN₄O₅). Four pyrrole rings coordinate around a central Mg²⁺ ion. Absorbs red (680nm) and blue (430nm) light. Phylo confidence: 97%.',
+  'evolutionary map of carotenoids':'Carotenoids are C₄₀ tetraterpenoids diverging from an isoprenoid ancestor ~3 GYA. They split into carotenes and xanthophylls ~340 MYA. See the Evo Map tab for the full interactive tree.',
+  'compare anthocyanins':'Anthocyanins share a flavylium core. Cyanidin (88%) gives red-purple. Delphinidin gives blue-purple. Pelargonidin gives orange-red. Colour shifts with pH: red at pH 2, purple at pH 7, blue at pH 11.'
 };
 let busy=false;
 function sw(id,btn){
   document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));
-  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
   document.getElementById('p-'+id).classList.add('on');
   btn.classList.add('on');
 }
-function addMsg(txt,role,tag,tagCls){
+function addMsg(t,role,tag,tc){
   const msgs=document.getElementById('msgs');
-  const row=document.createElement('div');
-  row.className='br '+(role==='u'?'u':'b');
-  if(role==='u'){row.innerHTML='<div class="bbl">'+txt+'</div>';}
-  else{row.innerHTML='<div class="bav">🧬</div><div class="bbl">'+txt+(tag?'<br><span class="btag '+(tagCls||'')+'">'+tag+'</span>':'')+'</div>';}
-  msgs.appendChild(row);
+  const r=document.createElement('div');
+  r.className='br '+(role==='u'?'u':'b');
+  if(role==='u'){r.innerHTML='<div class="bbl">'+t+'</div>';}
+  else{r.innerHTML='<div class="bav">🧬</div><div class="bbl">'+t+(tag?'<br><span class="tag '+(tc||'')+'">'+tag+'</span>':'')+'</div>';}
+  msgs.appendChild(r);
   msgs.scrollTop=msgs.scrollHeight;
 }
 function ask(q){document.getElementById('inp').value=q;send();}
@@ -241,35 +230,35 @@ function send(){
   busy=true;inp.value='';
   addMsg(v,'u');
   const msgs=document.getElementById('msgs');
-  const trow=document.createElement('div');
-  trow.className='br b';
-  trow.innerHTML='<div class="bav">🧬</div><div class="typing"><span></span><span></span><span></span></div>';
-  msgs.appendChild(trow);
+  const tr=document.createElement('div');
+  tr.className='br b';
+  tr.innerHTML='<div class="bav">🧬</div><div class="typ"><span></span><span></span><span></span></div>';
+  msgs.appendChild(tr);
   msgs.scrollTop=msgs.scrollHeight;
   setTimeout(()=>{
-    trow.remove();
-    const key=v.toLowerCase();
-    const reply=REPLIES[key]||'Query received: '+v+'. RAG retrieval active — connect the live backend at web-production-51dc1.up.railway.app to get real AI responses from your corpus.';
-    const tag=key.includes('chloro')?'RAG':key.includes('carot')?'Phylo':key.includes('antho')?'Molecular':'RAG';
-    const cls=tag==='Phylo'?'phy':tag==='Molecular'?'mol':'';
-    addMsg(reply,'b',tag,cls);
+    tr.remove();
+    const k=v.toLowerCase();
+    const rep=R[k]||'Query received: '+v+'. Connect the backend at web-production-51dc1.up.railway.app for live RAG responses.';
+    const tag=k.includes('chloro')?'RAG':k.includes('carot')?'Phylo':k.includes('antho')?'Molecular':'RAG';
+    const tc=tag==='Phylo'?'p':tag==='Molecular'?'m':'';
+    addMsg(rep,'b',tag,tc);
     busy=false;
   },1200);
 }
-function selMol(i,el){
-  document.querySelectorAll('.mc').forEach(c=>c.classList.remove('sel'));
-  el.classList.add('sel');
-  const m=MOLS[i];
-  document.getElementById('md-n').textContent=m.n;
-  document.getElementById('md-f').textContent=m.f;
-  document.getElementById('md-c').textContent=m.c;
-  document.getElementById('md-m').textContent=m.m;
-  document.getElementById('md-a').textContent=m.a;
-  const p=document.getElementById('md-p');
+function sm(i,el){
+  document.querySelectorAll('.mc').forEach(c=>c.classList.remove('on'));
+  el.classList.add('on');
+  const m=M[i];
+  document.getElementById('mn').textContent=m.n;
+  document.getElementById('mf').textContent=m.f;
+  document.getElementById('mc2').textContent=m.c;
+  document.getElementById('mw').textContent=m.w;
+  document.getElementById('ma').textContent=m.a;
+  const p=document.getElementById('mp');
   p.textContent=m.p;p.style.color=m.col;
-  document.getElementById('md-d').textContent=m.d;
+  document.getElementById('md').textContent=m.d;
 }
-function filt(el){
+function ef(el){
   document.querySelectorAll('.ef').forEach(e=>e.classList.remove('on'));
   el.classList.add('on');
 }
