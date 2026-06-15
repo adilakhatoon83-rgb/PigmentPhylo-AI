@@ -1,20 +1,32 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# 🧬 PigmentPhylo AI
+### BIO-ARC-772 · A RAG-Based Bioinformatic Interface for Phylochemical Categorization
 
-# Run and deploy your AI Studio app
+![Status](https://img.shields.io/badge/status-live-1D9E75?style=flat-square)
+![Backend](https://img.shields.io/badge/backend-Railway-purple?style=flat-square)
+![AI](https://img.shields.io/badge/AI-Gemini-blue?style=flat-square)
+![RAG](https://img.shields.io/badge/RAG-Pinecone-orange?style=flat-square)
 
-This contains everything you need to run your app locally.
+## 🌐 Live App
+**[→ Open PigmentPhylo AI](https://adilakhatoon83-rgb.github.io/PigmentPhylo-AI)**
 
-View your app in AI Studio: https://ai.studio/apps/9a8e9fd6-e589-49f9-9cf2-e51712338ab7
+## What is PigmentPhylo AI?
+An AI-powered bioinformatics research interface that combines RAG retrieval, molecular analysis, and phylogenetic categorization of biological pigments including chlorophylls, carotenoids, anthocyanins, and tetrapyrroles.
 
-## Run Locally
+## Features
+- 💬 **RAG Chat** — Ask about any pigment, get scientific answers from your corpus
+- 🌿 **Evolutionary Map** — Interactive phylogenetic tree spanning 3.5 billion years
+- ⚗️ **Molecules** — Structural schematics with molecular data panels
+- 🖼️ **Images** — Absorption spectra, colour gradients, pH shift visualizations
 
-**Prerequisites:**  Node.js
+## Tech Stack
+| Layer | Technology |
+|---|---|
+| Frontend | HTML · CSS · JavaScript |
+| Backend | FastAPI · Python |
+| AI Engine | Google Gemini |
+| Vector DB | Pinecone RAG |
+| File Storage | AWS S3 |
+| Hosting | GitHub Pages + Railway |
 
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## Project Reference
+**BIO-ARC-772** · Built with Google AI Studio · Deployed June 2026
