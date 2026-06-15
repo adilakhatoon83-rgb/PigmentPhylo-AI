@@ -1,0 +1,6 @@
+{
+  "name": "PigmentPhylo AI",
+  "description": "Mobile-optimized single-page web app for phylogenetic pigment transition and molecular spectral analysis (BIO-ARC-772).",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
