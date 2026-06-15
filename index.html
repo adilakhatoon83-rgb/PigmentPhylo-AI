@@ -223,7 +223,7 @@ function addMsg(t,role,tag,tc){
   msgs.scrollTop=msgs.scrollHeight;
 }
 function ask(q){document.getElementById('inp').value=q;send();}
-function send(){
+async function send(){
   const inp=document.getElementById('inp');
   const v=inp.value.trim();
   if(!v||busy)return;
@@ -235,34 +235,34 @@ function send(){
   tr.innerHTML='<div class="bav">🧬</div><div class="typ"><span></span><span></span><span></span></div>';
   msgs.appendChild(tr);
   msgs.scrollTop=msgs.scrollHeight;
-  setTimeout(()=>{
-    tr.remove();
-    const k=v.toLowerCase();
-    const rep=R[k]||'Query received: '+v+'. Connect the backend at pigmentphylo-ai.onrender.com for live RAG responses.';
-    const tag=k.includes('chloro')?'RAG':k.includes('carot')?'Phylo':k.includes('antho')?'Molecular':'RAG';
-    const tc=tag==='Phylo'?'p':tag==='Molecular'?'m':'';
-    addMsg(rep,'b',tag,tc);
+  const k=v.toLowerCase();
+  const local=R[k];
+  if(local){
+    setTimeout(()=>{
+      tr.remove();
+      const tag=k.includes('chloro')?'RAG':k.includes('carot')?'Phylo':k.includes('antho')?'Molecular':'RAG';
+      const tc=tag==='Phylo'?'p':tag==='Molecular'?'m':'';
+      addMsg(local,'b',tag,tc);
+      busy=false;
+    },1200);
+  } else {
+    try {
+      const res=await fetch('https://pigmentphylo-ai.onrender.com/chat',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({message:v,history:[]})
+      });
+      const data=await res.json();
+      tr.remove();
+      addMsg(data.reply||'Response received.','b','RAG','');
+    } catch(e){
+      tr.remove();
+      addMsg('Backend waking up — please try again in 30 seconds.','b','RAG','');
+    }
     busy=false;
-  },1200);
+  }
 }
-function sm(i,el){
-  document.querySelectorAll('.mc').forEach(c=>c.classList.remove('on'));
-  el.classList.add('on');
-  const m=M[i];
-  document.getElementById('mn').textContent=m.n;
-  document.getElementById('mf').textContent=m.f;
-  document.getElementById('mc2').textContent=m.c;
-  document.getElementById('mw').textContent=m.w;
-  document.getElementById('ma').textContent=m.a;
-  const p=document.getElementById('mp');
-  p.textContent=m.p;p.style.color=m.col;
-  document.getElementById('md').textContent=m.d;
-}
-function ef(el){
-  document.querySelectorAll('.ef').forEach(e=>e.classList.remove('on'));
-  el.classList.add('on');
-}
-  setInterval(()=>fetch('https://pigmentphylo-ai.onrender.com/health'),600000);
+setInterval(()=>fetch('https://pigmentphylo-ai.onrender.com/health').catch(()=>{}),600000);
 </script>
 </body>
 </html>
