@@ -238,7 +238,7 @@ function send(){
   setTimeout(()=>{
     tr.remove();
     const k=v.toLowerCase();
-    const rep=R[k]||'Query received: '+v+'. Connect the backend at web-production-51dc1.up.railway.app for live RAG responses.';
+    const rep=R[k]||'Query received: '+v+'. Connect the backend at pigmentphylo-ai.onrender.com for live RAG responses.';
     const tag=k.includes('chloro')?'RAG':k.includes('carot')?'Phylo':k.includes('antho')?'Molecular':'RAG';
     const tc=tag==='Phylo'?'p':tag==='Molecular'?'m':'';
     addMsg(rep,'b',tag,tc);
