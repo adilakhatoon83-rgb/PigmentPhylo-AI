@@ -116,69 +116,180 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#0a0f1a;color:#e2
 
 <!-- ═══ EVO MAP PANE ═══ -->
 <div id="p-evo" class="pane">
-  <div class="evo-scroll">
-    <div class="sec-title">Pigment evolutionary map · 3.5 billion years</div>
-    <div class="filter-row">
-      <span class="ef on" onclick="evoFilter(this,'all')">All</span>
-      <span class="ef" onclick="evoFilter(this,'chl')">Chlorophylls</span>
-      <span class="ef" onclick="evoFilter(this,'car')">Carotenoids</span>
-      <span class="ef" onclick="evoFilter(this,'fla')">Flavonoids</span>
+  <div style="flex:1;overflow-y:auto;padding:8px;">
+    <div style="font-size:11px;font-weight:600;color:#94a3b8;margin-bottom:8px;">Phylochemical tree · 3 lineages · 38 nodes</div>
+    <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px;">
+      <button onclick="evoFilt('all',this)" style="font-size:9px;padding:3px 10px;border-radius:12px;border:1px solid #334155;color:#64748b;background:#111827;cursor:pointer;" id="ef-all">All</button>
+      <button onclick="evoFilt('chl',this)" style="font-size:9px;padding:3px 10px;border-radius:12px;border:1px solid #1e2d40;color:#64748b;background:#111827;cursor:pointer;" id="ef-chl">Chlorophylls</button>
+      <button onclick="evoFilt('car',this)" style="font-size:9px;padding:3px 10px;border-radius:12px;border:1px solid #1e2d40;color:#64748b;background:#111827;cursor:pointer;" id="ef-car">Carotenoids</button>
+      <button onclick="evoFilt('ant',this)" style="font-size:9px;padding:3px 10px;border-radius:12px;border:1px solid #1e2d40;color:#64748b;background:#111827;cursor:pointer;" id="ef-ant">Anthocyanins</button>
     </div>
-    <svg width="100%" viewBox="0 0 340 275" style="background:#0f1923;border-radius:10px;display:block;margin-bottom:10px;">
-      <!-- Ancestor node -->
-      <rect x="110" y="10" width="120" height="26" rx="5" fill="#1a2540" stroke="#334155" stroke-width="0.8"/>
-      <text x="170" y="27" text-anchor="middle" font-size="8.5" fill="#94a3b8" font-weight="600">Isoprenoid ancestor 3.5 GYA</text>
-      <!-- Branch lines to main nodes -->
-      <line class="ev-chl" x1="170" y1="36" x2="90" y2="74" stroke="#334155" stroke-width="1"/>
-      <line class="ev-car" x1="170" y1="36" x2="250" y2="74" stroke="#334155" stroke-width="1"/>
-      <!-- Chlorophyll-a node -->
-      <rect class="ev-chl" x="28" y="74" width="124" height="26" rx="5" fill="#0f3d2a" stroke="#1D9E75" stroke-width="1.2"/>
-      <text class="ev-chl" x="90" y="91" text-anchor="middle" font-size="9" fill="#1D9E75" font-weight="600">Chlorophyll-a</text>
-      <!-- beta-Carotene node -->
-      <rect class="ev-car" x="188" y="74" width="124" height="26" rx="5" fill="#2d1e08" stroke="#EF9F27" stroke-width="1.2"/>
-      <text class="ev-car" x="250" y="91" text-anchor="middle" font-size="9" fill="#EF9F27" font-weight="600">β-Carotene</text>
-      <!-- Chl sub-lines -->
-      <line class="ev-chl" x1="68"  y1="100" x2="40"  y2="138" stroke="#1D9E7566" stroke-width="0.8"/>
-      <line class="ev-chl" x1="90"  y1="100" x2="90"  y2="138" stroke="#1D9E7566" stroke-width="0.8"/>
-      <line class="ev-chl" x1="112" y1="100" x2="140" y2="138" stroke="#1D9E7566" stroke-width="0.8"/>
-      <!-- Chl sub-nodes -->
-      <rect class="ev-chl" x="8"   y="138" width="56" height="22" rx="4" fill="#0a1a12" stroke="#1D9E7544"/>
-      <text class="ev-chl" x="36"  y="153" text-anchor="middle" font-size="8.5" fill="#5eead4">Chl-b</text>
-      <rect class="ev-chl" x="62"  y="138" width="58" height="22" rx="4" fill="#0a1a12" stroke="#1D9E7544"/>
-      <text class="ev-chl" x="91"  y="153" text-anchor="middle" font-size="8.5" fill="#5eead4">Bacteriochl</text>
-      <rect class="ev-chl" x="118" y="138" width="46" height="22" rx="4" fill="#0a1a12" stroke="#1D9E7544"/>
-      <text class="ev-chl" x="141" y="153" text-anchor="middle" font-size="8.5" fill="#5eead4">Chl-c</text>
-      <!-- Car sub-lines -->
-      <line class="ev-car" x1="228" y1="100" x2="208" y2="138" stroke="#EF9F2766" stroke-width="0.8"/>
-      <line class="ev-car" x1="250" y1="100" x2="250" y2="138" stroke="#EF9F2766" stroke-width="0.8"/>
-      <line class="ev-car" x1="272" y1="100" x2="296" y2="138" stroke="#EF9F2766" stroke-width="0.8"/>
-      <!-- Car sub-nodes -->
-      <rect class="ev-car" x="183" y="138" width="50" height="22" rx="4" fill="#1a0e03" stroke="#EF9F2744"/>
-      <text class="ev-car" x="208" y="153" text-anchor="middle" font-size="8.5" fill="#fbbf24">α-Carotene</text>
-      <rect class="ev-car" x="226" y="138" width="48" height="22" rx="4" fill="#1a0e03" stroke="#EF9F2744"/>
-      <text class="ev-car" x="250" y="153" text-anchor="middle" font-size="8.5" fill="#fbbf24">Lycopene</text>
-      <rect class="ev-car" x="270" y="138" width="62" height="22" rx="4" fill="#1a0e03" stroke="#EF9F2744"/>
-      <text class="ev-car" x="301" y="153" text-anchor="middle" font-size="8.5" fill="#fbbf24">Xanthophyll</text>
-      <!-- Anthocyanin dashed line -->
-      <line class="ev-fla" x1="170" y1="36" x2="170" y2="195" stroke="#D4537E44" stroke-width="1" stroke-dasharray="4 3"/>
-      <!-- Anthocyanin node -->
-      <rect class="ev-fla" x="104" y="195" width="132" height="24" rx="5" fill="#2d0f1e" stroke="#D4537E" stroke-width="1.2"/>
-      <text class="ev-fla" x="170" y="211" text-anchor="middle" font-size="9" fill="#D4537E" font-weight="600">Anthocyanins · 180 MYA</text>
-      <!-- Footer text -->
-      <text x="8" y="260" font-size="7" fill="#334155">GYA = billion years ago · MYA = million years ago</text>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <svg id="phylo-svg" width="760" viewBox="0 0 760 820" style="display:block;min-width:760px;background:#0f1923;border-radius:8px;">
+      <defs>
+        <marker id="earr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+          <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+      </defs>
+      <line x1="60" y1="780" x2="730" y2="780" stroke="#334155" stroke-width="0.5"/>
+      <line x1="60"  y1="775" x2="60"  y2="785" stroke="#334155" stroke-width="0.5"/>
+      <line x1="200" y1="775" x2="200" y2="785" stroke="#334155" stroke-width="0.5"/>
+      <line x1="360" y1="775" x2="360" y2="785" stroke="#334155" stroke-width="0.5"/>
+      <line x1="520" y1="775" x2="520" y2="785" stroke="#334155" stroke-width="0.5"/>
+      <line x1="680" y1="775" x2="680" y2="785" stroke="#334155" stroke-width="0.5"/>
+      <text x="60"  y="797" text-anchor="middle" font-size="7" fill="#475569">3.5 GYA</text>
+      <text x="200" y="797" text-anchor="middle" font-size="7" fill="#475569">2.7 GYA</text>
+      <text x="360" y="797" text-anchor="middle" font-size="7" fill="#475569">480 MYA</text>
+      <text x="520" y="797" text-anchor="middle" font-size="7" fill="#475569">180 MYA</text>
+      <text x="680" y="797" text-anchor="middle" font-size="7" fill="#475569">Today</text>
+      <line x1="60"  y1="15" x2="60"  y2="780" stroke="#1a2540" stroke-width="0.4" stroke-dasharray="3 5"/>
+      <line x1="200" y1="15" x2="200" y2="780" stroke="#1a2540" stroke-width="0.4" stroke-dasharray="3 5"/>
+      <line x1="360" y1="15" x2="360" y2="780" stroke="#1a2540" stroke-width="0.4" stroke-dasharray="3 5"/>
+      <line x1="520" y1="15" x2="520" y2="780" stroke="#1a2540" stroke-width="0.4" stroke-dasharray="3 5"/>
+      <line x1="680" y1="15" x2="680" y2="780" stroke="#1a2540" stroke-width="0.4" stroke-dasharray="3 5"/>
+      <rect id="nd-root" x="12" y="368" width="88" height="34" rx="6" fill="#1a2540" stroke="#334155" stroke-width="0.8" style="cursor:pointer;" onclick="evoShow('root')"/>
+      <text x="56" y="382" text-anchor="middle" font-size="8" fill="#94a3b8" font-weight="500" style="pointer-events:none;">Isoprenoid</text>
+      <text x="56" y="394" text-anchor="middle" font-size="7" fill="#64748b" style="pointer-events:none;">ancestor</text>
+      <path id="ln-r-chl" d="M100 378 L200 160" fill="none" stroke="#334155" stroke-width="1.2"/>
+      <path id="ln-r-car" d="M100 385 L200 410" fill="none" stroke="#334155" stroke-width="1.2"/>
+      <path id="ln-r-ant" d="M100 392 L200 660" fill="none" stroke="#334155" stroke-width="1.2"/>
+      <rect id="nd-proto" x="168" y="140" width="108" height="34" rx="6" fill="#0f3d2a" stroke="#1D9E75" stroke-width="0.8" style="cursor:pointer;" onclick="evoShow('proto')"/>
+      <text x="222" y="155" text-anchor="middle" font-size="8" fill="#1D9E75" font-weight="500" style="pointer-events:none;">Protochl. ancestor</text>
+      <text x="222" y="167" text-anchor="middle" font-size="7" fill="#5eead4" style="pointer-events:none;">3.5 GYA tetrapyrrole</text>
+      <path id="ln-p-bchl" d="M276 150 L360 80"  fill="none" stroke="#1D9E75" stroke-width="0.9"/>
+      <path id="ln-p-chla" d="M276 155 L360 136" fill="none" stroke="#1D9E75" stroke-width="0.9"/>
+      <path id="ln-p-sir"  d="M276 160 L360 192" fill="none" stroke="#1D9E75" stroke-width="0.9"/>
+      <rect id="nd-bchl" x="328" y="62" width="108" height="30" rx="5" fill="#0f3d2a" stroke="#1D9E75" stroke-width="0.7" style="cursor:pointer;" onclick="evoShow('bchl')"/>
+      <text x="382" y="75" text-anchor="middle" font-size="8" fill="#1D9E75" font-weight="500" style="pointer-events:none;">Bacteriochlorophyll</text>
+      <text x="382" y="86" text-anchor="middle" font-size="7" fill="#5eead4" style="pointer-events:none;">3.5 GYA · anoxygenic</text>
+      <path id="ln-bchl-a" d="M436 72 L520 52"  fill="none" stroke="#0F6E56" stroke-width="0.6" stroke-dasharray="5 3"/>
+      <path id="ln-bchl-b" d="M436 76 L520 96"  fill="none" stroke="#0F6E56" stroke-width="0.6" stroke-dasharray="5 3"/>
+      <rect id="nd-bchla" x="490" y="36" width="88" height="26" rx="4" fill="#0a1a12" stroke="#1D9E7566" stroke-width="0.6" style="cursor:pointer;" onclick="evoShow('bchla')"/>
+      <text x="534" y="52" text-anchor="middle" font-size="7.5" fill="#5eead4" font-weight="500" style="pointer-events:none;">BChl-a (750nm)</text>
+      <rect id="nd-bchlb" x="490" y="80" width="88" height="26" rx="4" fill="#0a1a12" stroke="#1D9E7566" stroke-width="0.6" style="cursor:pointer;" onclick="evoShow('bchlb')"/>
+      <text x="534" y="96" text-anchor="middle" font-size="7.5" fill="#5eead4" font-weight="500" style="pointer-events:none;">BChl-b (800nm)</text>
+      <rect id="nd-chla" x="328" y="118" width="108" height="30" rx="5" fill="#0f3d2a" stroke="#1D9E75" stroke-width="0.8" style="cursor:pointer;" onclick="evoShow('chla')"/>
+      <text x="382" y="131" text-anchor="middle" font-size="8" fill="#1D9E75" font-weight="500" style="pointer-events:none;">Chlorophyll-a</text>
+      <text x="382" y="142" text-anchor="middle" font-size="7" fill="#5eead4" style="pointer-events:none;">2.7 GYA · 97% conf.</text>
+      <path id="ln-ca-d"  d="M436 124 L520 102" fill="none" stroke="#0F6E56" stroke-width="0.6" stroke-dasharray="5 3"/>
+      <path id="ln-ca-b"  d="M436 129 L520 134" fill="none" stroke="#0F6E56" stroke-width="0.6" stroke-dasharray="5 3"/>
+      <path id="ln-ca-c"  d="M436 133 L520 166" fill="none" stroke="#0F6E56" stroke-width="0.6" stroke-dasharray="5 3"/>
+      <path id="ln-ca-f"  d="M436 137 L520 198" fill="none" stroke="#0F6E56" stroke-width="0.6" stroke-dasharray="5 3"/>
+      <path id="ln-ca-ph" d="M436 141 L520 230" fill="none" stroke="#0F6E56" stroke-width="0.6" stroke-dasharray="5 3"/>
+      <rect id="nd-chld" x="490" y="86"  width="88" height="26" rx="4" fill="#0a1a12" stroke="#1D9E7566" stroke-width="0.6" style="cursor:pointer;" onclick="evoShow('chld')"/>
+      <text x="534" y="102" text-anchor="middle" font-size="7.5" fill="#5eead4" font-weight="500" style="pointer-events:none;">Chl-d (697nm)</text>
+      <rect id="nd-chlb" x="490" y="120" width="88" height="26" rx="4" fill="#0a1a12" stroke="#1D9E7566" stroke-width="0.6" style="cursor:pointer;" onclick="evoShow('chlb')"/>
+      <text x="534" y="136" text-anchor="middle" font-size="7.5" fill="#5eead4" font-weight="500" style="pointer-events:none;">Chl-b (642nm)</text>
+      <rect id="nd-chlc" x="490" y="152" width="88" height="26" rx="4" fill="#0a1a12" stroke="#1D9E7566" stroke-width="0.6" style="cursor:pointer;" onclick="evoShow('chlc')"/>
+      <text x="534" y="168" text-anchor="middle" font-size="7.5" fill="#5eead4" font-weight="500" style="pointer-events:none;">Chl-c (630nm)</text>
+      <rect id="nd-chlf" x="490" y="184" width="88" height="26" rx="4" fill="#0a1a12" stroke="#1D9E7566" stroke-width="0.6" style="cursor:pointer;" onclick="evoShow('chlf')"/>
+      <text x="534" y="200" text-anchor="middle" font-size="7.5" fill="#5eead4" font-weight="500" style="pointer-events:none;">Chl-f (706nm)</text>
+      <rect id="nd-pheo" x="490" y="216" width="88" height="26" rx="4" fill="#0a1a12" stroke="#1D9E7566" stroke-width="0.6" style="cursor:pointer;" onclick="evoShow('pheo')"/>
+      <text x="534" y="232" text-anchor="middle" font-size="7.5" fill="#5eead4" font-weight="500" style="pointer-events:none;">Pheophytin</text>
+      <path id="ln-chlb-gl" d="M578 134 L650 120" fill="none" stroke="#085041" stroke-width="0.5" stroke-dasharray="4 4"/>
+      <rect id="nd-chlide" x="620" y="107" width="100" height="26" rx="4" fill="#041c10" stroke="#085041" stroke-width="0.5" style="cursor:pointer;" onclick="evoShow('chlide')"/>
+      <text x="670" y="123" text-anchor="middle" font-size="7.5" fill="#5eead4" font-weight="500" style="pointer-events:none;">Chlorophyllide</text>
+      <rect id="nd-sir" x="328" y="174" width="108" height="30" rx="5" fill="#0f3d2a" stroke="#1D9E75" stroke-width="0.7" style="cursor:pointer;" onclick="evoShow('sir')"/>
+      <text x="382" y="187" text-anchor="middle" font-size="8" fill="#1D9E75" font-weight="500" style="pointer-events:none;">Sirohaem</text>
+      <text x="382" y="198" text-anchor="middle" font-size="7" fill="#5eead4" style="pointer-events:none;">sulfite reductase</text>
+      <rect id="nd-bcar" x="168" y="392" width="108" height="34" rx="6" fill="#2d1e08" stroke="#EF9F27" stroke-width="0.8" style="cursor:pointer;" onclick="evoShow('bcar')"/>
+      <text x="222" y="407" text-anchor="middle" font-size="8" fill="#EF9F27" font-weight="500" style="pointer-events:none;">β-Carotene</text>
+      <text x="222" y="419" text-anchor="middle" font-size="7" fill="#fbbf24" style="pointer-events:none;">3 GYA · C40 · 93% conf.</text>
+      <path id="ln-bc-lyc"  d="M276 400 L360 310" fill="none" stroke="#BA7517" stroke-width="0.9"/>
+      <path id="ln-bc-acar" d="M276 406 L360 350" fill="none" stroke="#BA7517" stroke-width="0.9"/>
+      <path id="ln-bc-zea"  d="M276 410 L360 390" fill="none" stroke="#BA7517" stroke-width="0.9"/>
+      <path id="ln-bc-lut"  d="M276 416 L360 430" fill="none" stroke="#BA7517" stroke-width="0.9"/>
+      <path id="ln-bc-ast"  d="M276 420 L360 470" fill="none" stroke="#BA7517" stroke-width="0.9"/>
+      <path id="ln-bc-phy"  d="M276 424 L360 510" fill="none" stroke="#BA7517" stroke-width="0.9"/>
+      <rect id="nd-lyc"  x="328" y="294" width="88" height="28" rx="5" fill="#2d1e08" stroke="#EF9F27" stroke-width="0.7" style="cursor:pointer;" onclick="evoShow('lyc')"/>
+      <text x="372" y="311" text-anchor="middle" font-size="8" fill="#fbbf24" font-weight="500" style="pointer-events:none;">Lycopene</text>
+      <rect id="nd-acar" x="328" y="334" width="88" height="28" rx="5" fill="#2d1e08" stroke="#EF9F27" stroke-width="0.7" style="cursor:pointer;" onclick="evoShow('acar')"/>
+      <text x="372" y="351" text-anchor="middle" font-size="8" fill="#fbbf24" font-weight="500" style="pointer-events:none;">α-Carotene</text>
+      <rect id="nd-zea"  x="328" y="374" width="88" height="28" rx="5" fill="#2d1e08" stroke="#EF9F27" stroke-width="0.7" style="cursor:pointer;" onclick="evoShow('zea')"/>
+      <text x="372" y="391" text-anchor="middle" font-size="8" fill="#fbbf24" font-weight="500" style="pointer-events:none;">Zeaxanthin</text>
+      <rect id="nd-lut"  x="328" y="414" width="88" height="28" rx="5" fill="#2d1e08" stroke="#EF9F27" stroke-width="0.7" style="cursor:pointer;" onclick="evoShow('lut')"/>
+      <text x="372" y="431" text-anchor="middle" font-size="8" fill="#fbbf24" font-weight="500" style="pointer-events:none;">Lutein</text>
+      <rect id="nd-ast"  x="328" y="454" width="88" height="28" rx="5" fill="#2d1e08" stroke="#EF9F27" stroke-width="0.7" style="cursor:pointer;" onclick="evoShow('ast')"/>
+      <text x="372" y="471" text-anchor="middle" font-size="8" fill="#fbbf24" font-weight="500" style="pointer-events:none;">Astaxanthin</text>
+      <rect id="nd-phy"  x="328" y="494" width="88" height="28" rx="5" fill="#2d1e08" stroke="#EF9F27" stroke-width="0.7" style="cursor:pointer;" onclick="evoShow('phy')"/>
+      <text x="372" y="511" text-anchor="middle" font-size="8" fill="#fbbf24" font-weight="500" style="pointer-events:none;">Phytoene</text>
+      <path id="ln-zea-xan" d="M416 388 L520 366" fill="none" stroke="#BA7517" stroke-width="0.6" stroke-dasharray="5 3"/>
+      <path id="ln-zea-via" d="M416 393 L520 406" fill="none" stroke="#BA7517" stroke-width="0.6" stroke-dasharray="5 3"/>
+      <path id="ln-lut-neo" d="M416 429 L520 446" fill="none" stroke="#BA7517" stroke-width="0.6" stroke-dasharray="5 3"/>
+      <path id="ln-ast-can" d="M416 469 L520 486" fill="none" stroke="#BA7517" stroke-width="0.6" stroke-dasharray="5 3"/>
+      <rect id="nd-xan"  x="490" y="352" width="100" height="26" rx="4" fill="#1a0e03" stroke="#EF9F2766" stroke-width="0.6" style="cursor:pointer;" onclick="evoShow('xan')"/>
+      <text x="540" y="368" text-anchor="middle" font-size="7.5" fill="#fbbf24" font-weight="500" style="pointer-events:none;">Xanthophylls</text>
+      <rect id="nd-via"  x="490" y="392" width="100" height="26" rx="4" fill="#1a0e03" stroke="#EF9F2766" stroke-width="0.6" style="cursor:pointer;" onclick="evoShow('via')"/>
+      <text x="540" y="408" text-anchor="middle" font-size="7.5" fill="#fbbf24" font-weight="500" style="pointer-events:none;">Violaxanthin</text>
+      <rect id="nd-neo"  x="490" y="432" width="100" height="26" rx="4" fill="#1a0e03" stroke="#EF9F2766" stroke-width="0.6" style="cursor:pointer;" onclick="evoShow('neo')"/>
+      <text x="540" y="448" text-anchor="middle" font-size="7.5" fill="#fbbf24" font-weight="500" style="pointer-events:none;">Neoxanthin</text>
+      <rect id="nd-can"  x="490" y="472" width="100" height="26" rx="4" fill="#1a0e03" stroke="#EF9F2766" stroke-width="0.6" style="cursor:pointer;" onclick="evoShow('can')"/>
+      <text x="540" y="488" text-anchor="middle" font-size="7.5" fill="#fbbf24" font-weight="500" style="pointer-events:none;">Canthaxanthin</text>
+      <path id="ln-xan-fu" d="M590 364 L650 342" fill="none" stroke="#633806" stroke-width="0.5" stroke-dasharray="4 4"/>
+      <path id="ln-via-npq" d="M590 406 L650 406" fill="none" stroke="#633806" stroke-width="0.5" stroke-dasharray="4 4"/>
+      <path id="ln-can-cr" d="M590 486 L650 486" fill="none" stroke="#633806" stroke-width="0.5" stroke-dasharray="4 4"/>
+      <rect id="nd-fuco" x="620" y="328" width="100" height="26" rx="4" fill="#1a0803" stroke="#63380666" stroke-width="0.5" style="cursor:pointer;" onclick="evoShow('fuco')"/>
+      <text x="670" y="344" text-anchor="middle" font-size="7.5" fill="#fbbf24" font-weight="500" style="pointer-events:none;">Fucoxanthin</text>
+      <rect id="nd-npq"  x="620" y="392" width="100" height="26" rx="4" fill="#1a0803" stroke="#63380666" stroke-width="0.5" style="cursor:pointer;" onclick="evoShow('npq')"/>
+      <text x="670" y="408" text-anchor="middle" font-size="7.5" fill="#fbbf24" font-weight="500" style="pointer-events:none;">NPQ cycle</text>
+      <rect id="nd-croc" x="620" y="472" width="100" height="26" rx="4" fill="#1a0803" stroke="#63380666" stroke-width="0.5" style="cursor:pointer;" onclick="evoShow('croc')"/>
+      <text x="670" y="488" text-anchor="middle" font-size="7.5" fill="#fbbf24" font-weight="500" style="pointer-events:none;">Crocin (saffron)</text>
+      <rect id="nd-phe2" x="168" y="642" width="108" height="34" rx="6" fill="#2d0e08" stroke="#D85A30" stroke-width="0.8" style="cursor:pointer;" onclick="evoShow('phe2')"/>
+      <text x="222" y="657" text-anchor="middle" font-size="8" fill="#D85A30" font-weight="500" style="pointer-events:none;">Phenylalanine</text>
+      <text x="222" y="669" text-anchor="middle" font-size="7" fill="#fca5a5" style="pointer-events:none;">shikimate pathway</text>
+      <path id="ln-f-nar"  d="M276 652 L360 590" fill="none" stroke="#993C1D" stroke-width="0.9"/>
+      <path id="ln-f-quer" d="M276 657 L360 634" fill="none" stroke="#993C1D" stroke-width="0.9"/>
+      <path id="ln-f-chal" d="M276 662 L360 678" fill="none" stroke="#993C1D" stroke-width="0.9"/>
+      <path id="ln-f-res"  d="M276 667 L360 722" fill="none" stroke="#993C1D" stroke-width="0.9"/>
+      <rect id="nd-nar"  x="328" y="574" width="88" height="28" rx="5" fill="#2d0e08" stroke="#D85A30" stroke-width="0.7" style="cursor:pointer;" onclick="evoShow('nar')"/>
+      <text x="372" y="591" text-anchor="middle" font-size="8" fill="#fca5a5" font-weight="500" style="pointer-events:none;">Naringenin</text>
+      <rect id="nd-quer" x="328" y="618" width="88" height="28" rx="5" fill="#2d0e08" stroke="#D85A30" stroke-width="0.7" style="cursor:pointer;" onclick="evoShow('quer')"/>
+      <text x="372" y="635" text-anchor="middle" font-size="8" fill="#fca5a5" font-weight="500" style="pointer-events:none;">Quercetin</text>
+      <rect id="nd-chal" x="328" y="662" width="88" height="28" rx="5" fill="#2d0e08" stroke="#D85A30" stroke-width="0.7" style="cursor:pointer;" onclick="evoShow('chal')"/>
+      <text x="372" y="679" text-anchor="middle" font-size="8" fill="#fca5a5" font-weight="500" style="pointer-events:none;">Chalcone</text>
+      <rect id="nd-res"  x="328" y="706" width="88" height="28" rx="5" fill="#2d0e08" stroke="#D85A30" stroke-width="0.7" style="cursor:pointer;" onclick="evoShow('res')"/>
+      <text x="372" y="723" text-anchor="middle" font-size="8" fill="#fca5a5" font-weight="500" style="pointer-events:none;">Resveratrol</text>
+      <path id="ln-ch-cya" d="M416 675 L520 610" fill="none" stroke="#993C1D" stroke-width="0.7" stroke-dasharray="5 3"/>
+      <path id="ln-ch-del" d="M416 679 L520 648" fill="none" stroke="#993C1D" stroke-width="0.7" stroke-dasharray="5 3"/>
+      <path id="ln-ch-pel" d="M416 683 L520 686" fill="none" stroke="#993C1D" stroke-width="0.7" stroke-dasharray="5 3"/>
+      <path id="ln-ch-mal" d="M416 687 L520 724" fill="none" stroke="#993C1D" stroke-width="0.7" stroke-dasharray="5 3"/>
+      <path id="ln-qu-kae" d="M416 633 L520 572" fill="none" stroke="#993C1D" stroke-width="0.6" stroke-dasharray="4 4"/>
+      <rect id="nd-kae" x="490" y="558" width="100" height="26" rx="4" fill="#1a0808" stroke="#D85A3066" stroke-width="0.6" style="cursor:pointer;" onclick="evoShow('kae')"/>
+      <text x="540" y="574" text-anchor="middle" font-size="7.5" fill="#fca5a5" font-weight="500" style="pointer-events:none;">Kaempferol</text>
+      <rect id="nd-cya" x="490" y="596" width="100" height="26" rx="4" fill="#2d0f1e" stroke="#D4537E" stroke-width="0.8" style="cursor:pointer;" onclick="evoShow('cya')"/>
+      <text x="540" y="612" text-anchor="middle" font-size="7.5" fill="#D4537E" font-weight="500" style="pointer-events:none;">Cyanidin</text>
+      <rect id="nd-del" x="490" y="634" width="100" height="26" rx="4" fill="#2d0f1e" stroke="#D4537E" stroke-width="0.8" style="cursor:pointer;" onclick="evoShow('del')"/>
+      <text x="540" y="650" text-anchor="middle" font-size="7.5" fill="#D4537E" font-weight="500" style="pointer-events:none;">Delphinidin</text>
+      <rect id="nd-pel" x="490" y="672" width="100" height="26" rx="4" fill="#2d0f1e" stroke="#D4537E" stroke-width="0.8" style="cursor:pointer;" onclick="evoShow('pel')"/>
+      <text x="540" y="688" text-anchor="middle" font-size="7.5" fill="#D4537E" font-weight="500" style="pointer-events:none;">Pelargonidin</text>
+      <rect id="nd-mal" x="490" y="710" width="100" height="26" rx="4" fill="#2d0f1e" stroke="#D4537E" stroke-width="0.8" style="cursor:pointer;" onclick="evoShow('mal')"/>
+      <text x="540" y="726" text-anchor="middle" font-size="7.5" fill="#D4537E" font-weight="500" style="pointer-events:none;">Malvidin</text>
+      <path id="ln-cy-gl" d="M590 610 L650 596" fill="none" stroke="#72243E" stroke-width="0.5" stroke-dasharray="4 4"/>
+      <path id="ln-de-gl" d="M590 648 L650 634" fill="none" stroke="#72243E" stroke-width="0.5" stroke-dasharray="4 4"/>
+      <path id="ln-pe-gl" d="M590 686 L650 672" fill="none" stroke="#72243E" stroke-width="0.5" stroke-dasharray="4 4"/>
+      <path id="ln-ma-gl" d="M590 724 L650 710" fill="none" stroke="#72243E" stroke-width="0.5" stroke-dasharray="4 4"/>
+      <rect id="nd-c3g" x="620" y="582" width="120" height="26" rx="4" fill="#1a0010" stroke="#72243E" stroke-width="0.5" style="cursor:pointer;" onclick="evoShow('c3g')"/>
+      <text x="680" y="598" text-anchor="middle" font-size="7.5" fill="#D4537E" font-weight="500" style="pointer-events:none;">Cya-3-glucoside</text>
+      <rect id="nd-d3g" x="620" y="620" width="120" height="26" rx="4" fill="#1a0010" stroke="#72243E" stroke-width="0.5" style="cursor:pointer;" onclick="evoShow('d3g')"/>
+      <text x="680" y="636" text-anchor="middle" font-size="7.5" fill="#D4537E" font-weight="500" style="pointer-events:none;">Del-3-glucoside</text>
+      <rect id="nd-p3g" x="620" y="658" width="120" height="26" rx="4" fill="#1a0010" stroke="#72243E" stroke-width="0.5" style="cursor:pointer;" onclick="evoShow('p3g')"/>
+      <text x="680" y="674" text-anchor="middle" font-size="7.5" fill="#D4537E" font-weight="500" style="pointer-events:none;">Pel-3-glucoside</text>
+      <rect id="nd-m3g" x="620" y="696" width="120" height="26" rx="4" fill="#1a0010" stroke="#72243E" stroke-width="0.5" style="cursor:pointer;" onclick="evoShow('m3g')"/>
+      <text x="680" y="712" text-anchor="middle" font-size="7.5" fill="#D4537E" font-weight="500" style="pointer-events:none;">Malvidin-3-glucoside</text>
+      <text x="400" y="758" text-anchor="middle" font-size="7" fill="#475569">anthocyanidins → glycosylation → stable anthocyanins · 180 MYA</text>
+      <rect x="20" y="750" width="10" height="10" rx="2" fill="#0f3d2a" stroke="#1D9E75" stroke-width="0.5"/>
+      <text x="34" y="759" font-size="7" fill="#64748b">Chlorophylls</text>
+      <rect x="110" y="750" width="10" height="10" rx="2" fill="#2d1e08" stroke="#EF9F27" stroke-width="0.5"/>
+      <text x="124" y="759" font-size="7" fill="#64748b">Carotenoids</text>
+      <rect x="210" y="750" width="10" height="10" rx="2" fill="#2d0f1e" stroke="#D4537E" stroke-width="0.5"/>
+      <text x="224" y="759" font-size="7" fill="#64748b">Anthocyanins</text>
     </svg>
-    <!-- Legend -->
-    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px;">
-      <div style="display:flex;align-items:center;gap:5px;font-size:9px;color:#64748b;">
-        <div style="width:8px;height:8px;border-radius:50%;background:#1D9E75;flex-shrink:0;"></div>Chlorophylls
-      </div>
-      <div style="display:flex;align-items:center;gap:5px;font-size:9px;color:#64748b;">
-        <div style="width:8px;height:8px;border-radius:50%;background:#EF9F27;flex-shrink:0;"></div>Carotenoids
-      </div>
-      <div style="display:flex;align-items:center;gap:5px;font-size:9px;color:#64748b;">
-        <div style="width:8px;height:8px;border-radius:50%;background:#D4537E;flex-shrink:0;"></div>Flavonoids
-      </div>
     </div>
+    <div id="evo-card" style="display:none;background:#0f1923;border:1px solid #1e2d40;border-radius:8px;padding:10px;margin-top:8px;">
+      <div id="evo-card-name" style="font-size:12px;font-weight:600;color:#e2e8f0;margin-bottom:6px;border-bottom:1px solid #1e2d40;padding-bottom:4px;"></div>
+      <div id="evo-card-rows"></div>
+    </div>
+    <p style="font-size:9px;color:#334155;margin-top:6px;">Tap any node for data · scroll right to see full tree</p>
   </div>
 </div>
 
@@ -407,7 +518,72 @@ function evoFilter(el, group) {
   }
 }
 
-// Keep Render backend awake
+const EVO_DATA = {
+  root:{n:'Isoprenoid ancestor',r:[['Era','3.5–4 GYA'],['Pathway','MEP / MVA terpenoid biosynthesis'],['Branches','Chlorophylls, Carotenoids, Anthocyanins']]},
+  proto:{n:'Protochl. ancestor',r:[['Era','~3.5 GYA'],['Key','Porphyrin macrocycle + Mg²⁺'],['Leads to','All chlorophyll classes']]},
+  bchl:{n:'Bacteriochlorophyll',r:[['Formula','C55H74MgN4O6'],['MW','916.5 g/mol'],['Absorption','375nm + 760nm (NIR)'],['Organisms','Anoxygenic phototrophs']]},
+  bchla:{n:'BChl-a',r:[['Absorption','750–800nm'],['Organisms','Purple + green sulfur bacteria'],['Role','NIR light harvesting']]},
+  bchlb:{n:'BChl-b',r:[['Absorption','800–1020nm (deepest red)'],['Organisms','Rhodobacter sphaeroides'],['Note','Longest wavelength absorbing chlorophyll']]},
+  chla:{n:'Chlorophyll-a',r:[['Formula','C55H72MgN4O5'],['MW','893.5 g/mol'],['Absorption','430nm + 680nm'],['Conf.','97%'],['Era','~2.7 GYA']]},
+  chld:{n:'Chlorophyll-d',r:[['Absorption','697nm (red-shifted)'],['Era','~800 MYA'],['Organisms','Acaryochloris marina']]},
+  chlb:{n:'Chlorophyll-b',r:[['Formula','C55H70MgN4O6'],['MW','907.5 g/mol'],['Absorption','453nm + 642nm'],['Era','~480 MYA']]},
+  chlc:{n:'Chlorophyll-c',r:[['Formula','C35H28MgN4O5'],['MW','609.9 g/mol'],['Absorption','447nm + 630nm'],['Era','~250 MYA']]},
+  chlf:{n:'Chlorophyll-f',r:[['Absorption','706nm (far-red)'],['Era','~300 MYA'],['Organisms','Halomicronema hongdechloris']]},
+  pheo:{n:'Pheophytin',r:[['Type','Mg-free Chl-a'],['Absorption','667nm'],['Role','First e⁻ acceptor in PSII']]},
+  chlide:{n:'Chlorophyllide',r:[['Type','Chl-a without phytol tail'],['MW','615 g/mol'],['Role','Biosynthetic intermediate']]},
+  sir:{n:'Sirohaem',r:[['Class','Isobacteriochlorin'],['Centre','Fe (not Mg)'],['Role','Sulfite reductase cofactor']]},
+  bcar:{n:'β-Carotene',r:[['Formula','C40H56'],['MW','536.9 g/mol'],['Absorption','450–490nm'],['Conf.','93%'],['Era','~3 GYA']]},
+  lyc:{n:'Lycopene',r:[['Formula','C40H56 (acyclic)'],['MW','536.9 g/mol'],['Absorption','471nm'],['Sources','Tomatoes, watermelon']]},
+  acar:{n:'α-Carotene',r:[['Formula','C40H56'],['Rings','1β + 1ε (asymmetric)'],['Absorption','446–476nm'],['Sources','Carrots, pumpkin']]},
+  zea:{n:'Zeaxanthin',r:[['Formula','C40H56O2'],['MW','568.9 g/mol'],['Absorption','478nm'],['Era','~340 MYA'],['Role','Macular pigment']]},
+  lut:{n:'Lutein',r:[['Formula','C40H56O2'],['MW','568.9 g/mol'],['Absorption','445nm'],['Sources','Kale, spinach, egg yolk']]},
+  ast:{n:'Astaxanthin',r:[['Formula','C40H52O4'],['MW','596.8 g/mol'],['Absorption','480nm'],['Note','Antioxidant ×500 vs vit E']]},
+  phy:{n:'Phytoene',r:[['Formula','C40H64'],['Type','Colourless C40 precursor'],['Conj.','3 conjugated double bonds']]},
+  xan:{n:'Xanthophylls',r:[['Class','Oxygenated carotenoids'],['Origin','~340 MYA'],['Members','Zeaxanthin, Lutein, Fucoxanthin']]},
+  via:{n:'Violaxanthin',r:[['Formula','C40H56O4'],['MW','600.9 g/mol'],['Cycle','Violaxanthin ↔ Zeaxanthin (NPQ)']]},
+  neo:{n:'Neoxanthin',r:[['Formula','C40H56O4'],['Structure','Allenic xanthophyll'],['Role','ABA biosynthesis precursor']]},
+  can:{n:'Canthaxanthin',r:[['Formula','C40H52O2'],['MW','564.8 g/mol'],['Absorption','466nm'],['Sources','Flamingo feathers, chanterelles']]},
+  fuco:{n:'Fucoxanthin',r:[['Formula','C42H58O6'],['MW','658.9 g/mol'],['Absorption','450–540nm (broad)'],['Note','Most abundant marine carotenoid']]},
+  npq:{n:'NPQ cycle',r:[['Reaction','Violaxanthin ↔ Zeaxanthin'],['Trigger','High light (lumen acidification)'],['Role','Dissipates excess energy as heat']]},
+  croc:{n:'Crocin (saffron)',r:[['Absorption','440nm (gold)'],['Source','Crocus sativus stigmas'],['Note','World\'s most expensive pigment']]},
+  phe2:{n:'Phenylalanine',r:[['Pathway','Shikimate → PAL → cinnamic acid'],['Era','~550 MYA'],['Leads to','All flavonoids + anthocyanins']]},
+  nar:{n:'Naringenin',r:[['Formula','C15H12O5'],['MW','272.3 g/mol'],['Enzyme','CHS + CHI'],['Branches','Flavonols, anthocyanins, isoflavones']]},
+  quer:{n:'Quercetin',r:[['Formula','C15H10O7'],['MW','302.2 g/mol'],['Class','Flavonol'],['Sources','Onions, capers, apples']]},
+  chal:{n:'Chalcone',r:[['Role','Branch point → all anthocyanidins'],['Enzyme','Anthocyanidin synthase (ANS)'],['Products','Cya, Del, Pel, Malvidin']]},
+  res:{n:'Resveratrol',r:[['Formula','C14H12O3'],['MW','228.2 g/mol'],['Sources','Red grapes, wine, peanuts']]},
+  kae:{n:'Kaempferol',r:[['Formula','C15H10O6'],['MW','286.2 g/mol'],['Absorption','367nm'],['Sources','Broccoli, kale, tea']]},
+  cya:{n:'Cyanidin',r:[['Formula','C15H11O6+'],['MW','287.2 g/mol'],['Absorption','510–540nm'],['Conf.','88%'],['Era','~180 MYA']]},
+  del:{n:'Delphinidin',r:[['Formula','C15H11O7+'],['MW','303.2 g/mol'],['Absorption','520–545nm'],['Colour','Blue-violet']]},
+  pel:{n:'Pelargonidin',r:[['Formula','C15H11O5+'],['MW','271.2 g/mol'],['Absorption','505–520nm'],['Colour','Orange-red']]},
+  mal:{n:'Malvidin',r:[['Formula','C17H15O7+'],['MW','331.3 g/mol'],['Absorption','542nm'],['Sources','Red wine (dominant pigment)']]},
+  c3g:{n:'Cyanidin-3-glucoside',r:[['Formula','C21H21O11+'],['MW','449.4 g/mol'],['Sources','Elderberry, blackcurrant']]},
+  d3g:{n:'Delphinidin-3-glucoside',r:[['MW','465.4 g/mol'],['Sources','Blueberries, purple corn']]},
+  p3g:{n:'Pelargonidin-3-glucoside',r:[['MW','433.4 g/mol'],['Sources','Strawberries, raspberries']]},
+  m3g:{n:'Malvidin-3-glucoside (oenin)',r:[['MW','493.4 g/mol'],['Sources','Red wine'],['Note','Primary wine colour marker']]},
+};
+const EVO_GRP = {
+  chl:new Set(['nd-proto','nd-bchl','nd-chla','nd-chlb','nd-chlc','nd-chld','nd-chlf','nd-pheo','nd-chlide','nd-sir','nd-bchla','nd-bchlb','ln-r-chl','ln-p-bchl','ln-p-chla','ln-p-sir','ln-ca-d','ln-ca-b','ln-ca-c','ln-ca-f','ln-ca-ph','ln-bchl-a','ln-bchl-b','ln-chlb-gl']),
+  car:new Set(['nd-bcar','nd-lyc','nd-acar','nd-zea','nd-lut','nd-ast','nd-phy','nd-xan','nd-via','nd-neo','nd-can','nd-fuco','nd-npq','nd-croc','ln-r-car','ln-bc-lyc','ln-bc-acar','ln-bc-zea','ln-bc-lut','ln-bc-ast','ln-bc-phy','ln-zea-xan','ln-zea-via','ln-lut-neo','ln-ast-can','ln-xan-fu','ln-via-npq','ln-can-cr']),
+  ant:new Set(['nd-phe2','nd-nar','nd-quer','nd-chal','nd-res','nd-kae','nd-cya','nd-del','nd-pel','nd-mal','nd-c3g','nd-d3g','nd-p3g','nd-m3g','ln-r-ant','ln-f-nar','ln-f-quer','ln-f-chal','ln-f-res','ln-ch-cya','ln-ch-del','ln-ch-pel','ln-ch-mal','ln-qu-kae','ln-cy-gl','ln-de-gl','ln-pe-gl','ln-ma-gl'])
+};
+function evoFilt(g,btn){
+  document.querySelectorAll('#p-evo button').forEach(b=>{b.style.borderColor='#1e2d40';b.style.color='#64748b';b.style.background='#111827';});
+  if(g==='all'){btn.style.borderColor='#334155';btn.style.color='#94a3b8';btn.style.background='#1a2540';}
+  else if(g==='chl'){btn.style.borderColor='#1D9E75';btn.style.color='#1D9E75';btn.style.background='#0f3d2a33';}
+  else if(g==='car'){btn.style.borderColor='#EF9F27';btn.style.color='#EF9F27';btn.style.background='#2d1e0833';}
+  else if(g==='ant'){btn.style.borderColor='#D4537E';btn.style.color='#D4537E';btn.style.background='#2d0f1e33';}
+  const svg=document.getElementById('phylo-svg');
+  const els=svg.querySelectorAll('[id^="nd-"],[id^="ln-"]');
+  if(g==='all'){els.forEach(e=>e.style.opacity='1');return;}
+  const active=new Set(['nd-root','ln-r-chl','ln-r-car','ln-r-ant',...EVO_GRP[g]]);
+  els.forEach(e=>e.style.opacity=active.has(e.id)?'1':'0.06');
+}
+function evoShow(id){
+  const d=EVO_DATA[id];if(!d)return;
+  document.getElementById('evo-card-name').textContent=d.n;
+  document.getElementById('evo-card-rows').innerHTML=d.r.map(([k,v])=>`<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px solid #1a2540;font-size:10px;"><span style="color:#64748b;">${k}</span><span style="color:#e2e8f0;font-weight:500;text-align:right;">${v}</span></div>`).join('');
+  document.getElementById('evo-card').style.display='block';
+}// Keep Render backend awake
 setInterval(() => fetch('https://pigmentphylo-ai.onrender.com/health').catch(() => {}), 600000);
 </script>
 </body>
